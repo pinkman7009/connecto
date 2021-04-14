@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
-export default function Home() {
+
+const register = () => {
   return (
     <section className={styles.formpage}>
       <div className={styles.content}>
@@ -12,16 +13,29 @@ export default function Home() {
         <img src='homepic.svg' alt='' className={styles.homeimg} />
       </div>
       <form className={styles.form}>
-        <h2 className={styles.largeText}>Log In</h2>
+        <h2 className={styles.largeText}>Register</h2>
+        <input type='text' className={styles.input} placeholder='full name' />
         <input type='email' className={styles.input} placeholder='email' />
+        <input
+          type='text'
+          className={styles.input}
+          placeholder='college/university'
+        />
         <input
           type='password'
           className={styles.input}
           placeholder='password'
         />
-        <input type='submit' value='Sign In' className={styles.btn} />
-        <Link href='/register'>New User? Register here.</Link>
+        <input
+          type='password'
+          className={styles.input}
+          placeholder='confirm password'
+        />
+        <input type='submit' value='Sign Up' className={styles.btn} />
+        <Link href='/'>Already a user? Log In here.</Link>
       </form>
     </section>
   );
-}
+};
+
+export default register;
