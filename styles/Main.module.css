@@ -1,0 +1,132 @@
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.feed {
+  min-height: 100vh;
+  width: 75%;
+  margin: 3rem 1rem;
+}
+.profileinfo {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 20%;
+  position: fixed;
+  top: 100px;
+  right: 50px;
+}
+.userinfo {
+  min-height: 50vh;
+  margin-bottom: 1rem;
+  width: 100%;
+  border: solid 3px #6e49ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  position: relative;
+}
+.avatar {
+  height: 150px;
+  width: 150px;
+  background: #d5cbff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.stat {
+  display: flex;
+  align-items: center;
+}
+.userstats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding: 1rem;
+}
+.groups {
+  height: 30vh;
+  width: 100%;
+  border: solid 3px #6e49ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* padding: 1rem; */
+}
+.groupList {
+  list-style: none;
+  color: #000;
+  text-align: center;
+  padding: 0;
+}
+
+.text {
+  color: grey;
+  font-size: 1.2rem;
+}
+.primaryText {
+  color: #6e49ff;
+  font-size: 1.2rem;
+}
+.darkText {
+  color: #000;
+  font-size: 1rem;
+}
+
+.newButtons {
+  display: flex;
+}
+.btn1 {
+  border-radius: 10px;
+  background: #fff;
+  border: 3px solid #6e49ff;
+  padding: 1rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #6e49ff;
+  width: 200px;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+.btn1:hover {
+  background: #6e49ff;
+  color: #fff;
+}
+.btn1:focus {
+  outline: none;
+}
+.btn2 {
+  border-radius: 10px;
+  background: #6e49ff;
+  padding: 1rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #fff;
+  border: 3px solid #6e49ff;
+  width: 200px;
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+.btn2:hover {
+  color: #6e49ff;
+  background: #fff;
+}
+.btn2:focus {
+  outline: none;
+}

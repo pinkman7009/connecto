@@ -19,7 +19,9 @@ export default function Home() {
           className={styles.input}
           placeholder='password'
         />
-        <input type='submit' value='Sign In' className={styles.btn} />
+        <a href='/home' className={styles.btn}>
+          Sign In
+        </a>
         <Link href='/register'>New User? Register here.</Link>
       </form>
     </section>

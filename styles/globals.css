@@ -6,6 +6,7 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   color: #6e49ff;
+  overflow-x: hidden;
 }
 
 a {

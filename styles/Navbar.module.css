@@ -1,0 +1,40 @@
+.navbar {
+  display: flex;
+  height: 100px;
+  width: 100vw;
+  padding: 1rem;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.title {
+  font-size: 2rem;
+  font-family: 'Righteous', sans-serif;
+}
+
+.search {
+  width: 40%;
+  padding: 1rem;
+  background: #dfdaf5;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  border: none;
+}
+.search:focus {
+  outline: none;
+}
+.icons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 20%;
+}
+.icons > * {
+  cursor: pointer;
+}
+.profile {
+  display: flex;
+  align-items: center;
+}
+.profile > * {
+  margin: 0 0.5rem;
+}
