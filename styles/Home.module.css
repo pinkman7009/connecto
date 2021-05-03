@@ -75,3 +75,13 @@
 .btn:focus {
   outline: none;
 }
+
+.disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+
+.error {
+  color: red;
+  font-weight: 300;
+}

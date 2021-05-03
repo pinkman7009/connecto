@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from '../styles/Navbar.module.css';
 import { Icon, InlineIcon } from '@iconify/react';
 import bxMessageRounded from '@iconify/icons-bx/bx-message-rounded';
 import usersSolid from '@iconify/icons-clarity/users-solid';
 import bxsUser from '@iconify/icons-bx/bxs-user';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+import FirebaseContext from '../context/firebase';
+import UserContext from '../context/user';
 
 const Navbar = () => {
+  const { firebase } = useContext(FirebaseContext);
+  const { user } = useContext(UserContext);
+
+  const router = useRouter();
+
+  const signOutHandler = () => {
+    firebase.auth().signOut();
+    router.push('/');
+  };
   return (
     <nav className={styles.navbar}>
-      <h2 className={styles.title}>Connecto</h2>
+      <Link href='/home'>
+        <h2 className={styles.title}>Connecto</h2>
+      </Link>
       <input
         type='text'
         placeholder='search users,colleges,events,groups'
@@ -16,20 +32,34 @@ const Navbar = () => {
       />
 
       <div className={styles.icons}>
-        <Icon
-          icon={bxMessageRounded}
-          style={{ color: '#6e49ff', fontSize: '42px' }}
-        />
-        <Icon
-          icon={usersSolid}
-          style={{ color: '#6e49ff', fontSize: '42px' }}
-        />
+        <Link href='/messages'>
+          <Icon
+            icon={bxMessageRounded}
+            style={{ color: '#6e49ff', fontSize: '42px' }}
+          />
+        </Link>
+        <Link href='/connections'>
+          <Icon
+            icon={usersSolid}
+            style={{ color: '#6e49ff', fontSize: '42px' }}
+          />
+        </Link>
       </div>
 
-      <div className={styles.profile}>
-        <Icon icon={bxsUser} style={{ color: '#6e49ff', fontSize: '42px' }} />
-        <p>Soumik Chaudhuri</p>
-      </div>
+      {user && (
+        <Link href='/profile/[id]' as={`/profile/${user.uid}`}>
+          <div className={styles.profile}>
+            <Icon
+              icon={bxsUser}
+              style={{ color: '#6e49ff', fontSize: '42px' }}
+            />
+            <p>{user.displayName}</p>
+          </div>
+        </Link>
+      )}
+      <button className={styles.btn1} type='button' onClick={signOutHandler}>
+        Logout
+      </button>
     </nav>
   );
 };

@@ -56,11 +56,11 @@ const FeedList = () => {
   ];
   return (
     <div className={styles.feedlist}>
-      {feed.map((item) =>
+      {feed.map((item, index) =>
         item.type === 'event' ? (
-          <EventCard event={item} />
+          <EventCard key={index} event={item} />
         ) : (
-          <PostCard post={item} />
+          <PostCard key={index} post={item} />
         )
       )}
     </div>

@@ -1,0 +1,110 @@
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.userinfo {
+  min-height: 30vh;
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  border: solid 3px #6e49ff;
+  padding: 2.5rem;
+  position: relative;
+}
+.avatar {
+  height: 200px;
+  width: 200px;
+  background: #d5cbff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.stat {
+  display: flex;
+  align-items: center;
+}
+.userstats {
+  display: flex;
+  justify-content: space-around;
+  width: 20%;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+  padding: 1rem;
+}
+.profileinfo {
+  margin-left: 2rem;
+}
+.text {
+  color: grey;
+  font-size: 1.2rem;
+  text-align: center;
+}
+.primaryText {
+  color: #6e49ff;
+  font-size: 2rem;
+}
+.darkText {
+  color: #000;
+  font-size: 1rem;
+}
+
+.newButtons {
+  display: flex;
+}
+.btn1 {
+  border-radius: 10px;
+  background: #fff;
+  border: 3px solid #6e49ff;
+  padding: 1rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #6e49ff;
+  width: 200px;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+.btn1:hover {
+  background: #6e49ff;
+  color: #fff;
+}
+.btn1:focus {
+  outline: none;
+}
+.btn2 {
+  border-radius: 10px;
+  background: #6e49ff;
+  padding: 1rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #fff;
+  border: 3px solid #6e49ff;
+  width: 200px;
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+.btn2:hover {
+  color: #6e49ff;
+  background: #fff;
+}
+.btn2:focus {
+  outline: none;
+}
+
+.profileFeed {
+  display: flex;
+}
+
+.groups {
+  width: 30vw;
+  margin-right: 1rem;
+}
