@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from '../styles/Profile.module.css';
 
 import { Icon, InlineIcon } from '@iconify/react';
@@ -11,16 +11,35 @@ import FeedList from './FeedList';
 
 import { getUserById } from '../services/firebase';
 
+import UserContext from '../context/user';
+
 const Profile = ({ id }) => {
+  const { user } = useContext(UserContext);
+
   const [userProfile, setUserProfile] = useState({});
+  const [isAuthUser, setIsAuthUser] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+
   useEffect(() => {
     const fetchUserProfileData = async (id) => {
       const [response] = await getUserById(id);
 
       setUserProfile(response);
+
+      if (id === user.uid) setIsAuthUser(true);
+
+      // console.log(response.connections);
     };
     if (id !== null && id !== undefined) fetchUserProfileData(id);
-  });
+  }, [id]);
+
+  const addToConnections = () => {
+    // add current user id to connections of auth user id
+    console.log('current user id: ', id);
+    console.log('auth user id: ', user.uid);
+
+    setIsConnected(true);
+  };
 
   return (
     <div className={styles.container}>
@@ -38,6 +57,16 @@ const Profile = ({ id }) => {
         </div>
 
         <div className={styles.userstats}>
+          {!isAuthUser === true ? (
+            <button
+              disabled={isConnected}
+              className={`${isConnected && styles.isconnected} ${styles.btn2}`}
+              onClick={addToConnections}
+            >
+              {isConnected === true ? 'Connected' : 'Connect'}
+              <Icon icon={plusIcon} style={{ fontSize: '40px' }} />
+            </button>
+          ) : null}
           <div className={styles.stat}>
             {userProfile.connections && userProfile.connections.length}{' '}
             <Icon

@@ -32,6 +32,30 @@
   width: 100%;
   display: flex;
   margin: 1rem 0;
+  font-size: 1.2rem;
   justify-content: space-between;
   align-items: center;
+}
+
+.btn2 {
+  border-radius: 10px;
+  background: #6e49ff;
+  padding: 1rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #fff;
+  border: 3px solid #6e49ff;
+  width: 150px;
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+.btn2:hover {
+  color: #6e49ff;
+  background: #fff;
+}
+.btn2:focus {
+  outline: none;
 }

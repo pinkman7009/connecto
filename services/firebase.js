@@ -1,5 +1,6 @@
 import { firebase, FieldValue } from '../lib/firebase';
 
+// check if email exists
 export const doesEmailExist = async (email) => {
   const result = await firebase
     .firestore()
@@ -10,6 +11,7 @@ export const doesEmailExist = async (email) => {
   return result.docs.map((user) => user.data().length > 0);
 };
 
+// get user from firestore
 export const getUserById = async (userId) => {
   const result = await firebase
     .firestore()

@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Connections.module.css';
 import { Icon, InlineIcon } from '@iconify/react';
 import bxsUser from '@iconify/icons-bx/bxs-user';
+import { getUserById } from '../services/firebase';
 
-const ConnectionItem = ({ name }) => {
+import Link from 'next/link';
+const ConnectionItem = ({ id }) => {
+  const [userProfile, setUserProfile] = useState({});
+
+  useEffect(() => {
+    const fetchUserProfileData = async (id) => {
+      const [response] = await getUserById(id);
+
+      setUserProfile(response);
+
+      console.log(response.fullName);
+    };
+    if (id !== null && id !== undefined) fetchUserProfileData(id);
+  }, []);
   return (
     <div className={styles.connectioncard}>
       <div className={styles.avatar}>
         <Icon icon={bxsUser} style={{ color: '#6e49ff', fontSize: '80px' }} />
       </div>
-      {name}
+      {userProfile.fullName}
+
+      <Link href='/profile/[id]' as={`/profile/${id}`}>
+        <button className={styles.btn2}>View Profile</button>
+      </Link>
     </div>
   );
 };
