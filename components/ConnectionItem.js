@@ -5,7 +5,7 @@ import bxsUser from '@iconify/icons-bx/bxs-user';
 import { getUserById } from '../services/firebase';
 
 import Link from 'next/link';
-const ConnectionItem = ({ id }) => {
+const ConnectionItem = ({ id, viewProfile }) => {
   const [userProfile, setUserProfile] = useState({});
 
   useEffect(() => {
@@ -24,10 +24,11 @@ const ConnectionItem = ({ id }) => {
         <Icon icon={bxsUser} style={{ color: '#6e49ff', fontSize: '80px' }} />
       </div>
       {userProfile.fullName}
-
-      <Link href='/profile/[id]' as={`/profile/${id}`}>
-        <button className={styles.btn2}>View Profile</button>
-      </Link>
+      {viewProfile === true && (
+        <Link href='/profile/[id]' as={`/profile/${id}`}>
+          <button className={styles.btn2}>View Profile</button>
+        </Link>
+      )}
     </div>
   );
 };

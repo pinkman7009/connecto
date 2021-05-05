@@ -18,7 +18,7 @@ const useUser = () => {
     }
   }, [user]);
 
-  return { user: activeUser };
+  return { authUser: activeUser };
 };
 
 export default useUser;

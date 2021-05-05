@@ -7,20 +7,20 @@ import UserContext from '../context/user';
 import useUser from '../hooks/useUser';
 
 const connections = () => {
-  const { user } = useUser();
+  const { authUser } = useUser();
   const [connections, setConnections] = useState([]);
 
   useEffect(() => {
     document.title = 'Connections - Connecto';
 
-    setConnections(user.connections);
-  }, [user]);
+    setConnections(authUser.connections);
+  }, [authUser]);
 
   return (
     <div>
       <Navbar />
       <div className={styles.container}>
-        <Connections connections={connections} />
+        <Connections connections={connections} viewProfile={true} />
       </div>
     </div>
   );

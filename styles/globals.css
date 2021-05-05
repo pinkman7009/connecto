@@ -27,3 +27,11 @@ a {
   font-size: 3rem;
   color: #6e49ff;
 }
+
+.container {
+  max-width: 1500px;
+  margin: 3rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
