@@ -6,22 +6,31 @@ import Navbar from '../components/Navbar';
 import FeedList from '../components/FeedList';
 import Groups from '../components/Groups';
 import Loader from '../components/Loader';
+import AddPost from '../components/AddPost';
+import AddEvent from '../components/AddEvent';
 
 import bxsUser from '@iconify/icons-bx/bxs-user';
 import usersSolid from '@iconify/icons-clarity/users-solid';
 import plusIcon from '@iconify/icons-akar-icons/plus';
 
 import useUser from '../hooks/useUser';
+import usePosts from '../hooks/usePosts';
 
 const home = () => {
-  // console.log('x', user);
+  const { posts } = usePosts();
+
+  const [addPost, setAddPost] = useState(false);
+  const [addEvent, setAddEvent] = useState(false);
 
   const { authUser } = useUser();
+
+  usePosts();
 
   useEffect(() => {
     document.title = 'Home - Connecto';
     console.log(authUser);
   }, [authUser]);
+
   return (
     <>
       {Object.keys(authUser).length === 0 ? (
@@ -33,20 +42,27 @@ const home = () => {
           <div className={styles.container}>
             <div className={styles.feed}>
               <div className={styles.newButtons}>
-                <button className={styles.btn1}>
+                <button
+                  className={styles.btn1}
+                  onClick={() => setAddPost((prev) => !prev)}
+                >
                   New Post
                   <Icon icon={plusIcon} style={{ fontSize: '40px' }} />
                 </button>
-                <button className={styles.btn2}>
+                <button
+                  className={styles.btn2}
+                  onClick={() => setAddEvent((prev) => !prev)}
+                >
                   New Event
                   <Icon icon={plusIcon} style={{ fontSize: '40px' }} />
                 </button>
               </div>
               <p className={styles.text}>
-                All the latest posts and events from all your connected colleges
-                and connections
+                All the latest posts and events from your connections
               </p>
-              <FeedList />
+              <AddPost showModal={addPost} setOpenModal={setAddPost} />
+              <AddEvent showModal={addEvent} setOpenModal={setAddEvent} />
+              {posts && <FeedList posts={posts} />}
             </div>
             <div className={styles.profileinfo}>
               <div className={styles.userinfo}>

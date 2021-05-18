@@ -9,8 +9,10 @@ import plusIcon from '@iconify/icons-akar-icons/plus';
 import Groups from './Groups';
 import FeedList from './FeedList';
 import Loader from './Loader';
+import AddPost from '../components/AddPost';
+import AddEvent from '../components/AddEvent';
 
-import { getUserById } from '../services/firebase';
+import { getUserById, getPostsOfUser } from '../services/firebase';
 import useUser from '../hooks/useUser';
 
 import UserContext from '../context/user';
@@ -19,9 +21,13 @@ const Profile = ({ id }) => {
   const { user } = useContext(UserContext);
   const { authUser } = useUser();
 
+  const [addPost, setAddPost] = useState(false);
+  const [addEvent, setAddEvent] = useState(false);
+
   const [userProfile, setUserProfile] = useState({});
   const [isAuthUser, setIsAuthUser] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
+  const [posts, setPosts] = useState(null);
 
   useEffect(() => {
     const fetchUserProfileData = async (id) => {
@@ -34,11 +40,16 @@ const Profile = ({ id }) => {
         if (authUser.connections.includes(id)) setIsConnected(true);
         else setIsConnected(false);
       }
-
-      // console.log(authUser);
-      // console.log(user);
     };
-    if (id !== null && id !== undefined) fetchUserProfileData(id);
+    const fetchPosts = async (id) => {
+      const response = await getPostsOfUser(id);
+
+      setPosts(response);
+    };
+    if (id !== null && id !== undefined) {
+      fetchUserProfileData(id);
+      fetchPosts(id);
+    }
   }, [id, authUser]);
 
   const addToConnections = () => {
@@ -97,11 +108,17 @@ const Profile = ({ id }) => {
             </div>
           </div>
           <div className={styles.newButtons}>
-            <button className={styles.btn1}>
+            <button
+              className={styles.btn1}
+              onClick={() => setAddPost((prev) => !prev)}
+            >
               New Post
               <Icon icon={plusIcon} style={{ fontSize: '40px' }} />
             </button>
-            <button className={styles.btn2}>
+            <button
+              className={styles.btn2}
+              onClick={() => setAddEvent((prev) => !prev)}
+            >
               New Event
               <Icon icon={plusIcon} style={{ fontSize: '40px' }} />
             </button>
@@ -110,11 +127,13 @@ const Profile = ({ id }) => {
             {isAuthUser === true ? 'Your' : `${userProfile.fullName}'s`} recent
             posts and events
           </p>
+          <AddPost showModal={addPost} setOpenModal={setAddPost} />
+          <AddEvent showModal={addEvent} setOpenModal={setAddEvent} />
           <div className={styles.profileFeed}>
             <div className={styles.groups}>
               <Groups />
             </div>
-            <FeedList />
+            {posts && <FeedList posts={posts} />}
           </div>
         </div>
       )}

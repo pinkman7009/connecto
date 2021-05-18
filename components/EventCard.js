@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatDistance } from 'date-fns';
 import styles from '../styles/Feed.module.css';
 import { Icon, InlineIcon } from '@iconify/react';
 
@@ -9,10 +10,13 @@ const EventCard = ({ event }) => {
       <div className={styles.content}>
         <div className={styles.cardTag}>Event</div>
         <p className={styles.cardTitle}>{event.title}</p>
-        <p className={styles.cardBody}>conducted by : {event.by}</p>
+        <p className={styles.cardBody}>conducted by : {event.college}</p>
 
         <div className={styles.cardFooter}>
-          <p>Time: {event.time}</p>
+          <div>
+            <p>Time: {event.time}</p>
+            <p>posted {formatDistance(event.dateCreated, new Date())} ago</p>
+          </div>
           <div className={styles.eventStats}>
             {event.people}
             <Icon

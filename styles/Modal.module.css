@@ -1,0 +1,111 @@
+.modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalBox {
+  background: #fff;
+  padding: 2rem;
+  width: 50%;
+  height: 70%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  border-radius: 20px;
+  animation: reveal-modal 0.3s;
+}
+
+@keyframes reveal-modal {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.title {
+  height: 60px;
+  width: 60%;
+  padding: 1rem;
+  background: #dfdaf5;
+  border-radius: 10px;
+  margin: 1rem auto;
+  border: none;
+  font-size: 1rem;
+  color: #000;
+}
+.title:focus {
+  outline: none;
+}
+
+.description {
+  height: 300px;
+  width: 60%;
+  padding: 1rem;
+  background: #dfdaf5;
+  border-radius: 10px;
+  margin: 1rem auto;
+  border: none;
+  font-size: 1rem;
+  color: #000;
+}
+
+.description:focus {
+  outline: none;
+}
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #6e49ff;
+  color: #fff;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.close:hover {
+  opacity: 0.7;
+}
+.close:focus {
+  outline: none;
+}
+.btn {
+  border-radius: 10px;
+  background: #6e49ff;
+  padding: 1rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #fff;
+  border: 3px solid #6e49ff;
+  width: 200px;
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  color: #6e49ff;
+  background: #fff;
+}
+.btn:focus {
+  outline: none;
+}
