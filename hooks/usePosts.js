@@ -28,6 +28,12 @@ const usePosts = () => {
 
         connectionPosts.sort((a, b) => b.dateCreated - a.dateCreated);
         setPosts(connectionPosts);
+      } else {
+        // if user does not have any connections just show their posts if they have any
+        const authUserPosts = await getPostsOfUser(user.uid);
+
+        authUserPosts.sort((a, b) => b.dateCreated - a.dateCreated);
+        setPosts(authUserPosts);
       }
     };
 

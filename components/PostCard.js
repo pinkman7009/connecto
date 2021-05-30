@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { formatDistance } from 'date-fns';
 import styles from '../styles/Feed.module.css';
 import { Icon, InlineIcon } from '@iconify/react';
 import thumbUp from '@iconify/icons-cil/thumb-up';
+import thumbDown from '@iconify/icons-cil/thumb-down';
 import Link from 'next/link';
 
 const PostCard = ({ post }) => {
-  useEffect(() => {
-    console.log(post);
-  }, []);
   return (
     <div className={styles.card}>
       <div className={styles.content}>
@@ -23,7 +21,9 @@ const PostCard = ({ post }) => {
         <p className={styles.cardBody}>studies at : {post.college}</p>
 
         <div className={styles.cardFooter}>
-          <p>written {formatDistance(post.dateCreated, new Date())} ago</p>
+          {post.dateCreated && (
+            <p>written {formatDistance(post.dateCreated, new Date())} ago</p>
+          )}
           <div className={styles.cardStats}>
             {post.likes}
             <Icon
@@ -32,7 +32,7 @@ const PostCard = ({ post }) => {
             />
             {post.dislikes}
             <Icon
-              icon={thumbUp}
+              icon={thumbDown}
               style={{ color: '#6e49ff', fontSize: '39px' }}
             />
           </div>

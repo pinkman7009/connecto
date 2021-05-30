@@ -27,7 +27,7 @@ const Profile = ({ id }) => {
   const [userProfile, setUserProfile] = useState({});
   const [isAuthUser, setIsAuthUser] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchUserProfileData = async (id) => {
@@ -107,33 +107,43 @@ const Profile = ({ id }) => {
               <p>Groups 4</p>
             </div>
           </div>
-          <div className={styles.newButtons}>
-            <button
-              className={styles.btn1}
-              onClick={() => setAddPost((prev) => !prev)}
-            >
-              New Post
-              <Icon icon={plusIcon} style={{ fontSize: '40px' }} />
-            </button>
-            <button
-              className={styles.btn2}
-              onClick={() => setAddEvent((prev) => !prev)}
-            >
-              New Event
-              <Icon icon={plusIcon} style={{ fontSize: '40px' }} />
-            </button>
-          </div>
+          {isAuthUser === true ? (
+            <div className={styles.newButtons}>
+              <button
+                className={styles.btn1}
+                onClick={() => setAddPost((prev) => !prev)}
+              >
+                New Post
+                <Icon icon={plusIcon} style={{ fontSize: '40px' }} />
+              </button>
+              <button
+                className={styles.btn2}
+                onClick={() => setAddEvent((prev) => !prev)}
+              >
+                New Event
+                <Icon icon={plusIcon} style={{ fontSize: '40px' }} />
+              </button>
+            </div>
+          ) : null}
+
           <p className={styles.text}>
             {isAuthUser === true ? 'Your' : `${userProfile.fullName}'s`} recent
             posts and events
           </p>
-          <AddPost showModal={addPost} setOpenModal={setAddPost} />
-          <AddEvent showModal={addEvent} setOpenModal={setAddEvent} />
+
           <div className={styles.profileFeed}>
             <div className={styles.groups}>
               <Groups />
             </div>
-            {posts && <FeedList posts={posts} />}
+
+            <FeedList
+              posts={posts}
+              setAllPosts={setPosts}
+              addPost={addPost}
+              setAddPost={setAddPost}
+              addEvent={addEvent}
+              setAddEvent={setAddEvent}
+            />
           </div>
         </div>
       )}

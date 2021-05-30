@@ -4,20 +4,39 @@ import styles from '../styles/Feed.module.css';
 import PostCard from './PostCard';
 import EventCard from './EventCard';
 
-const FeedList = ({ posts: allPosts }) => {
-  const [posts, setPosts] = useState(allPosts);
+import AddPost from '../components/AddPost';
+import AddEvent from '../components/AddEvent';
 
+const FeedList = ({
+  posts: allPosts,
+  setAllPosts,
+  addPost,
+  setAddPost,
+  addEvent,
+  setAddEvent,
+}) => {
   return (
-    <div className={styles.feedlist}>
-      {posts.length >= 1 &&
-        posts.map((item) =>
-          item.type === 'event' ? (
-            <EventCard key={item.postId} event={item} />
-          ) : (
-            <PostCard key={item.postId} post={item} />
-          )
-        )}
-    </div>
+    <>
+      {allPosts && (
+        <div className={styles.feedlist}>
+          {allPosts.length >= 1 &&
+            allPosts.map((item) =>
+              item.type === 'event' ? (
+                <EventCard key={item.postId} event={item} />
+              ) : (
+                <PostCard key={item.postId} post={item} />
+              )
+            )}
+        </div>
+      )}
+      <AddPost
+        posts={allPosts}
+        setAllPosts={setAllPosts}
+        showModal={addPost}
+        setOpenModal={setAddPost}
+      />
+      <AddEvent showModal={addEvent} setOpenModal={setAddEvent} />
+    </>
   );
 };
 

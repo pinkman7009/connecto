@@ -2,8 +2,10 @@ import React from 'react';
 import { formatDistance } from 'date-fns';
 import styles from '../styles/Feed.module.css';
 import { Icon, InlineIcon } from '@iconify/react';
+import Link from 'next/link';
 
 import usersSolid from '@iconify/icons-clarity/users-solid';
+
 const EventCard = ({ event }) => {
   return (
     <div className={styles.card}>
@@ -11,6 +13,11 @@ const EventCard = ({ event }) => {
         <div className={styles.cardTag}>Event</div>
         <p className={styles.cardTitle}>{event.title}</p>
         <p className={styles.cardBody}>conducted by : {event.college}</p>
+        <Link href='/profile/[id]' as={`/profile/${event.userId}`}>
+          <p className={styles.cardBody}>
+            posted by : <span className={styles.link}>{event.fullName}</span>
+          </p>
+        </Link>
 
         <div className={styles.cardFooter}>
           <div>

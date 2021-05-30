@@ -6,8 +6,6 @@ import Navbar from '../components/Navbar';
 import FeedList from '../components/FeedList';
 import Groups from '../components/Groups';
 import Loader from '../components/Loader';
-import AddPost from '../components/AddPost';
-import AddEvent from '../components/AddEvent';
 
 import bxsUser from '@iconify/icons-bx/bxs-user';
 import usersSolid from '@iconify/icons-clarity/users-solid';
@@ -22,14 +20,15 @@ const home = () => {
   const [addPost, setAddPost] = useState(false);
   const [addEvent, setAddEvent] = useState(false);
 
-  const { authUser } = useUser();
+  const [allPosts, setAllPosts] = useState([]);
 
-  usePosts();
+  const { authUser } = useUser();
 
   useEffect(() => {
     document.title = 'Home - Connecto';
-    console.log(authUser);
-  }, [authUser]);
+
+    setAllPosts(posts);
+  }, [authUser, posts]);
 
   return (
     <>
@@ -57,12 +56,16 @@ const home = () => {
                   <Icon icon={plusIcon} style={{ fontSize: '40px' }} />
                 </button>
               </div>
-              <p className={styles.text}>
-                All the latest posts and events from your connections
-              </p>
-              <AddPost showModal={addPost} setOpenModal={setAddPost} />
-              <AddEvent showModal={addEvent} setOpenModal={setAddEvent} />
-              {posts && <FeedList posts={posts} />}
+              <p className={styles.text}>All the latest posts and events</p>
+
+              <FeedList
+                posts={allPosts}
+                setAllPosts={setAllPosts}
+                addPost={addPost}
+                setAddPost={setAddPost}
+                addEvent={addEvent}
+                setAddEvent={setAddEvent}
+              />
             </div>
             <div className={styles.profileinfo}>
               <div className={styles.userinfo}>

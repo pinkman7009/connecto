@@ -26,6 +26,8 @@ export const getUserById = async (userId) => {
 
   return user;
 };
+
+// get the posts of a particular user by id
 export const getPostsOfUser = async (userId) => {
   const result = await firebase
     .firestore()
@@ -48,9 +50,11 @@ export const getPostsOfUser = async (userId) => {
   );
 
   // console.log('posts of user are', posts);
+  postsWithUserDetails.sort((a, b) => b.dateCreated - a.dateCreated);
   return postsWithUserDetails;
 };
 export const getPostsById = async (userId, connections) => {
+  // posts from user's connections
   const result = await firebase
     .firestore()
     .collection('posts')
@@ -62,8 +66,22 @@ export const getPostsById = async (userId, connections) => {
     docId: post.id,
   }));
 
+  // posts from user
+  const result2 = await firebase
+    .firestore()
+    .collection('posts')
+    .where('userId', '==', userId)
+    .get();
+
+  const authUserPosts = result2.docs.map((post) => ({
+    ...post.data(),
+    docId: post.id,
+  }));
+
+  const allPosts = [...userConnectedPosts, ...authUserPosts];
+
   const postsWithUserDetails = await Promise.all(
-    userConnectedPosts.map(async (post) => {
+    allPosts.map(async (post) => {
       const user = await getUserById(post.userId);
       const { fullName, college } = user[0];
 
