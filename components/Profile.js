@@ -9,8 +9,6 @@ import plusIcon from '@iconify/icons-akar-icons/plus';
 import Groups from './Groups';
 import FeedList from './FeedList';
 import Loader from './Loader';
-import AddPost from '../components/AddPost';
-import AddEvent from '../components/AddEvent';
 
 import { getUserById, getPostsOfUser } from '../services/firebase';
 import useUser from '../hooks/useUser';

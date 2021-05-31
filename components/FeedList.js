@@ -35,7 +35,12 @@ const FeedList = ({
         showModal={addPost}
         setOpenModal={setAddPost}
       />
-      <AddEvent showModal={addEvent} setOpenModal={setAddEvent} />
+      <AddEvent
+        posts={allPosts}
+        setAllPosts={setAllPosts}
+        showModal={addEvent}
+        setOpenModal={setAddEvent}
+      />
     </>
   );
 };
