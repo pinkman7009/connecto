@@ -7,6 +7,8 @@ import bxsUser from '@iconify/icons-bx/bxs-user';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import SearchBar from './SearchBar';
+
 import FirebaseContext from '../context/firebase';
 import UserContext from '../context/user';
 
@@ -25,12 +27,7 @@ const Navbar = () => {
       <Link href='/home'>
         <h2 className={styles.title}>Connecto</h2>
       </Link>
-      <input
-        type='text'
-        placeholder='search users,colleges,events,groups'
-        className={styles.search}
-      />
-
+      <SearchBar />
       <div className={styles.icons}>
         <Link href='/messages'>
           <Icon

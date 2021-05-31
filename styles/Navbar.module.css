@@ -11,17 +11,59 @@
   font-family: 'Righteous', sans-serif;
   cursor: pointer;
 }
-
-.search {
+.searchbox {
   width: 40%;
+  position: relative;
+}
+.search {
+  width: 100%;
   padding: 1rem;
   background: #dfdaf5;
-  border-radius: 50px;
+  border-radius: 10px;
   font-size: 1.2rem;
   border: none;
 }
 .search:focus {
   outline: none;
+}
+.autocomplete {
+  list-style: none;
+  position: absolute;
+  width: 100%;
+  padding: 1rem;
+  min-height: 100px;
+  background: #fff;
+  z-index: 1000;
+  border: 1px solid #dfdaf5;
+  border-radius: 10px;
+  margin: 0;
+}
+.magnify {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 25px;
+  height: 25px;
+}
+.searchField {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  cursor: pointer;
+  padding: 1rem;
+}
+.searchField:hover {
+  background: #dfdaf5;
+}
+.avatar {
+  height: 50px;
+  width: 50px;
+  background: #d5cbff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2rem;
 }
 .icons {
   display: flex;

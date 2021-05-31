@@ -92,3 +92,17 @@ export const getPostsById = async (userId, connections) => {
 
   return postsWithUserDetails;
 };
+
+export const usersBySearch = async (inputSearch) => {
+  const result = await firebase.firestore().collection('users').get();
+
+  // console.log(result.docs);
+  const allUsers = result.docs.map((item) => ({ ...item.data() }));
+
+  const searchedUsers = allUsers.filter((user) => {
+    const regex = new RegExp(inputSearch, 'gi');
+    return user.fullName.match(regex);
+  });
+
+  return searchedUsers.slice(0, 5);
+};
