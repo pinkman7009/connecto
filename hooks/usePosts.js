@@ -37,10 +37,10 @@ const usePosts = () => {
       }
     };
 
-    if (user.uid) {
+    if (user?.uid) {
       getPosts();
     }
-  }, [user?.uid]);
+  }, [user]);
 
   return { posts };
 };

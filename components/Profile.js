@@ -33,7 +33,7 @@ const Profile = ({ id }) => {
 
       setUserProfile(response);
 
-      if (id === user.uid) setIsAuthUser(true);
+      if (id === user?.uid) setIsAuthUser(true);
       else if (authUser.connections !== undefined) {
         if (authUser.connections.includes(id)) setIsConnected(true);
         else setIsConnected(false);
