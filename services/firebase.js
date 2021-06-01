@@ -53,6 +53,7 @@ export const getPostsOfUser = async (userId) => {
   postsWithUserDetails.sort((a, b) => b.dateCreated - a.dateCreated);
   return postsWithUserDetails;
 };
+
 export const getPostsById = async (userId, connections) => {
   // posts from user's connections
   const result = await firebase
@@ -93,6 +94,7 @@ export const getPostsById = async (userId, connections) => {
   return postsWithUserDetails;
 };
 
+// to get users by search field
 export const usersBySearch = async (inputSearch) => {
   const result = await firebase.firestore().collection('users').get();
 
@@ -105,4 +107,22 @@ export const usersBySearch = async (inputSearch) => {
   });
 
   return searchedUsers.slice(0, 5);
+};
+
+// to update user's connections
+
+export const updateUserConnections = async (
+  authUserDocId,
+  profileId,
+  isConnected
+) => {
+  return firebase
+    .firestore()
+    .collection('users')
+    .doc(authUserDocId)
+    .update({
+      connections: isConnected
+        ? FieldValue.arrayRemove(profileId)
+        : FieldValue.arrayUnion(profileId),
+    });
 };

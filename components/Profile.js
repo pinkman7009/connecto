@@ -5,12 +5,17 @@ import { Icon, InlineIcon } from '@iconify/react';
 import bxsUser from '@iconify/icons-bx/bxs-user';
 import usersSolid from '@iconify/icons-clarity/users-solid';
 import plusIcon from '@iconify/icons-akar-icons/plus';
+import removeIcon from '@iconify/icons-gg/remove';
 
 import Groups from './Groups';
 import FeedList from './FeedList';
 import Loader from './Loader';
 
-import { getUserById, getPostsOfUser } from '../services/firebase';
+import {
+  getUserById,
+  getPostsOfUser,
+  updateUserConnections,
+} from '../services/firebase';
 import useUser from '../hooks/useUser';
 
 import UserContext from '../context/user';
@@ -33,6 +38,8 @@ const Profile = ({ id }) => {
 
       setUserProfile(response);
 
+      // console.log('logged in user doc id is ', authUser.docId);
+
       if (id === user?.uid) setIsAuthUser(true);
       else if (authUser.connections !== undefined) {
         if (authUser.connections.includes(id)) setIsConnected(true);
@@ -50,12 +57,15 @@ const Profile = ({ id }) => {
     }
   }, [id, authUser]);
 
-  const addToConnections = () => {
+  const addToConnections = async () => {
     // add current user id to connections of auth user id
     console.log('current user id: ', id);
     console.log('auth user id: ', user.uid);
 
-    setIsConnected(true);
+    await updateUserConnections(authUser.docId, id, isConnected);
+
+    if (isConnected === false) setIsConnected(true);
+    else setIsConnected(false);
   };
 
   return (
@@ -84,15 +94,13 @@ const Profile = ({ id }) => {
 
             <div className={styles.userstats}>
               {!isAuthUser === true ? (
-                <button
-                  disabled={isConnected}
-                  className={`${isConnected && styles.isconnected} ${
-                    styles.btn2
-                  }`}
-                  onClick={addToConnections}
-                >
-                  {isConnected === true ? 'Connected' : 'Connect'}
-                  <Icon icon={plusIcon} style={{ fontSize: '40px' }} />
+                <button className={styles.btn2} onClick={addToConnections}>
+                  {isConnected === true ? 'Disconnect' : 'Connect'}
+                  {isConnected === false ? (
+                    <Icon icon={plusIcon} style={{ fontSize: '40px' }} />
+                  ) : (
+                    <Icon icon={removeIcon} style={{ fontSize: '40px' }} />
+                  )}
                 </button>
               ) : null}
               <div className={styles.stat}>

@@ -23,6 +23,7 @@
     "@iconify/icons-bx": "^1.1.0",
     "@iconify/icons-cil": "^1.1.0",
     "@iconify/icons-clarity": "^1.1.0",
+    "@iconify/icons-gg": "^1.1.0",
     "@iconify/icons-radix-icons": "^1.1.2",
     "@iconify/react": "^1.1.4"
   }
