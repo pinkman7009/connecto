@@ -126,3 +126,18 @@ export const updateUserConnections = async (
         : FieldValue.arrayUnion(profileId),
     });
 };
+
+// get chats of user by id
+export const getUserChats = async (id) => {
+  const result = await firebase
+    .firestore()
+    .collection('chats')
+    .where('users', 'array-contains', id)
+    .get();
+
+  const chats = result.docs.map((item) => ({
+    ...item.data(),
+    docId: item.id,
+  }));
+  return chats;
+};

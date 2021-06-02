@@ -5,6 +5,7 @@ import bxsUser from '@iconify/icons-bx/bxs-user';
 import { getUserById } from '../services/firebase';
 
 import Link from 'next/link';
+
 const ConnectionItem = ({ id, viewProfile }) => {
   const [userProfile, setUserProfile] = useState({});
 
@@ -13,8 +14,6 @@ const ConnectionItem = ({ id, viewProfile }) => {
       const [response] = await getUserById(id);
 
       setUserProfile(response);
-
-      console.log(response.fullName);
     };
     if (id !== null && id !== undefined) fetchUserProfileData(id);
   }, []);

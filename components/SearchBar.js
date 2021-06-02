@@ -18,7 +18,6 @@ const SearchBar = () => {
 
   useEffect(() => {
     const getUsersBySearch = async () => {
-      console.log('debounced search', debouncedSearch);
       const response = await usersBySearch(debouncedSearch);
 
       setSearchFields(response);
@@ -57,7 +56,11 @@ const SearchBar = () => {
             </Link>
           ))}
         </ul>
-      ) : null}
+      ) : debouncedSearch === '' ? null : (
+        <ul className={styles.autocomplete}>
+          <li className={styles.searchField}>No users found</li>
+        </ul>
+      )}
     </div>
   );
 };

@@ -1,62 +1,94 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { useCollection } from 'react-firebase-hooks/firestore';
+
 import styles from '../styles/Messages.module.css';
 import MessageItem from '../components/MessageItem';
 
-const MessageBox = () => {
+import UserContext from '../context/user';
+import FirebaseContext from '../context/firebase';
+
+const MessageBox = ({ chatRecipient, chatBox, chatId }) => {
+  const { user } = useContext(UserContext);
+  const { firebase, FieldValue } = useContext(FirebaseContext);
+
+  const endOfMessageRef = useRef(null);
+
   const [currentMessage, setCurrentMessage] = useState('');
 
-  let messages = [
-    {
-      name: 'Harsh Gupta',
-      message: 'Hey this is a test message 1',
-    },
-    {
-      name: 'Soumik Chaudhuri',
-      message: 'Hey this is a test message 2',
-    },
-    {
-      name: 'Harsh Gupta',
-      message: 'Hey this is a test message 3',
-    },
-    {
-      name: 'Soumik Chaudhuri',
-      message: 'Hey this is a test message 4',
-    },
-  ];
+  const [messagesSnapshot] = useCollection(
+    firebase
+      .firestore()
+      .collection('chats')
+      .doc(chatId)
+      .collection('messages')
+      .orderBy('dateCreated', 'asc')
+  );
 
-  const [allMessages, setAllMessages] = useState(messages);
+  const scrollToBottom = () => {
+    endOfMessageRef?.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  };
 
-  const sendMessage = () => {
-    setAllMessages(
-      allMessages.concat({ name: 'Soumik Chaudhuri', message: currentMessage })
-    );
-    setCurrentMessage('');
-    var element = document.getElementById('messagearea');
-    window.scrollTo(0, element.offsetHeight);
+  useEffect(() => {
+    scrollToBottom();
+  }, [messagesSnapshot]);
+
+  const sendMessage = async () => {
+    if (currentMessage !== '') {
+      await firebase
+        .firestore()
+        .collection('chats')
+        .doc(chatId)
+        .collection('messages')
+        .add({
+          dateCreated: Date.now(),
+          message: currentMessage,
+          user: user.displayName,
+        });
+
+      setCurrentMessage('');
+      scrollToBottom();
+    }
   };
   return (
-    <div className={styles.messagebox}>
-      <div className={styles.messageheader}>
-        <h3>Harsh Gupta</h3>
-        <p>Online 35m ago</p>
-      </div>
-      <div className={styles.messagearea} id='messagearea'>
-        {allMessages.map((item) => (
-          <MessageItem name={item.name} message={item.message} />
-        ))}
-      </div>
-      <div className={styles.messageInputBox}>
-        <textarea
-          placeholder='Write a message....'
-          className={styles.message}
-          value={currentMessage}
-          onChange={(e) => setCurrentMessage(e.target.value)}
-        ></textarea>
-        <button onClick={sendMessage} className={styles.btn2}>
-          Send
-        </button>
-      </div>
-    </div>
+    <>
+      {chatBox === true ? (
+        <div className={styles.messagebox}>
+          {' '}
+          <div className={styles.messageheader}>
+            <h3>{chatRecipient}</h3>
+          </div>
+          <div className={styles.messagearea} id='messagearea'>
+            {messagesSnapshot &&
+              messagesSnapshot.docs.map((message) => (
+                <MessageItem
+                  key={message.id}
+                  name={message.data().user}
+                  message={message.data().message}
+                />
+              ))}
+            <div ref={endOfMessageRef}></div>
+          </div>
+          <div className={styles.messageInputBox}>
+            <textarea
+              placeholder='Write a message....'
+              className={styles.message}
+              value={currentMessage}
+              onChange={(e) => setCurrentMessage(e.target.value)}
+            ></textarea>
+            <button onClick={sendMessage} className={styles.btn2}>
+              Send
+            </button>
+          </div>{' '}
+        </div>
+      ) : (
+        <div className={styles.nomessagebox}>
+          <h2>No chats open! Click on a chat to get started talking!</h2>
+        </div>
+      )}
+    </>
   );
 };
 
