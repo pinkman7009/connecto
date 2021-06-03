@@ -112,7 +112,29 @@
 .btn2:focus {
   outline: none;
 }
-
+.btnAdd {
+  display: inline-block;
+  border-radius: 10px;
+  background: #6e49ff;
+  padding: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #fff;
+  border: 3px solid #6e49ff;
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  width: 60%;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+.btnAdd:hover {
+  color: #6e49ff;
+  background: #fff;
+}
+.btnAdd:focus {
+  outline: none;
+}
 .avatar {
   height: 70px;
   width: 70px;

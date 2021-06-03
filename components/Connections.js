@@ -3,7 +3,7 @@ import styles from '../styles/Connections.module.css';
 import ConnectionItem from './ConnectionItem';
 import Loader from '../components/Loader';
 
-const Connections = ({ connections, viewProfile }) => {
+const Connections = ({ connections, viewProfile, startChatting }) => {
   return (
     <div className={styles.connectionlist}>
       <h2>Connections</h2>
@@ -13,7 +13,11 @@ const Connections = ({ connections, viewProfile }) => {
         <h3>You have no connections</h3>
       ) : (
         connections.map((item) => (
-          <ConnectionItem id={item} viewProfile={viewProfile} />
+          <ConnectionItem
+            id={item}
+            viewProfile={viewProfile}
+            startChatting={startChatting}
+          />
         ))
       )}
     </div>

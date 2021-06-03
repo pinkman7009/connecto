@@ -3,7 +3,6 @@ import styles from '../styles/Connections.module.css';
 import Navbar from '../components/Navbar';
 import Connections from '../components/Connections';
 
-import UserContext from '../context/user';
 import useUser from '../hooks/useUser';
 
 const connections = () => {

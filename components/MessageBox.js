@@ -54,40 +54,34 @@ const MessageBox = ({ chatRecipient, chatBox, chatId }) => {
   };
   return (
     <>
-      {chatBox === true ? (
-        <div className={styles.messagebox}>
-          {' '}
-          <div className={styles.messageheader}>
-            <h3>{chatRecipient}</h3>
-          </div>
-          <div className={styles.messagearea} id='messagearea'>
-            {messagesSnapshot &&
-              messagesSnapshot.docs.map((message) => (
-                <MessageItem
-                  key={message.id}
-                  name={message.data().user}
-                  message={message.data().message}
-                />
-              ))}
-            <div ref={endOfMessageRef}></div>
-          </div>
-          <div className={styles.messageInputBox}>
-            <textarea
-              placeholder='Write a message....'
-              className={styles.message}
-              value={currentMessage}
-              onChange={(e) => setCurrentMessage(e.target.value)}
-            ></textarea>
-            <button onClick={sendMessage} className={styles.btn2}>
-              Send
-            </button>
-          </div>{' '}
+      <div className={styles.messagebox}>
+        {' '}
+        <div className={styles.messageheader}>
+          <h3>{chatRecipient}</h3>
         </div>
-      ) : (
-        <div className={styles.nomessagebox}>
-          <h2>No chats open! Click on a chat to get started talking!</h2>
+        <div className={styles.messagearea} id='messagearea'>
+          {messagesSnapshot &&
+            messagesSnapshot.docs.map((message) => (
+              <MessageItem
+                key={message.id}
+                name={message.data().user}
+                message={message.data().message}
+              />
+            ))}
+          <div ref={endOfMessageRef}></div>
         </div>
-      )}
+        <div className={styles.messageInputBox}>
+          <textarea
+            placeholder='Write a message....'
+            className={styles.message}
+            value={currentMessage}
+            onChange={(e) => setCurrentMessage(e.target.value)}
+          ></textarea>
+          <button onClick={sendMessage} className={styles.btn2}>
+            Send
+          </button>
+        </div>{' '}
+      </div>
     </>
   );
 };

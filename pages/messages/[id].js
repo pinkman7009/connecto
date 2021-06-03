@@ -4,6 +4,7 @@ import styles from '../../styles/Messages.module.css';
 import Navbar from '../../components/Navbar';
 import MessageBox from '../../components/MessageBox';
 import ChatSidebar from '../../components/ChatSidebar';
+import AddChat from '../../components/AddChat';
 
 import useUser from '../../hooks/useUser';
 import { getUserChats } from '../../services/firebase';
@@ -11,10 +12,12 @@ import { getUserChats } from '../../services/firebase';
 import getRecipientName from '../../helpers/getRecipientName';
 
 import { useRouter } from 'next/router';
+
 const chat = () => {
   const { authUser } = useUser();
   const [chat, setChat] = useState([]);
   const [chatRecipient, setChatRecipient] = useState('');
+  const [addChat, setAddChat] = useState(false);
 
   const router = useRouter();
   const { id } = router.query;
@@ -38,7 +41,7 @@ const chat = () => {
       getChats(authUser.userId);
       getRecipient(id, authUser.userId);
     }
-  }, [authUser]);
+  }, [authUser, id]);
 
   return (
     <div>
@@ -46,9 +49,12 @@ const chat = () => {
 
       <div className={styles.container}>
         <div className={styles.messageFriends}>
-          <ChatSidebar chat={chat} viewProfile={false} />
+          <ChatSidebar chat={chat} setAddChat={setAddChat} />
         </div>
+
         <MessageBox chatRecipient={chatRecipient} chatBox={true} chatId={id} />
+
+        <AddChat showModal={addChat} setOpenModal={setAddChat} />
       </div>
     </div>
   );
