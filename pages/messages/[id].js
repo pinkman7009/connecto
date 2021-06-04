@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useCollection } from 'react-firebase-hooks/firestore';
 import styles from '../../styles/Messages.module.css';
+
+import FirebaseContext from '../../context/firebase';
 
 import Navbar from '../../components/Navbar';
 import MessageBox from '../../components/MessageBox';
@@ -7,15 +11,24 @@ import ChatSidebar from '../../components/ChatSidebar';
 import AddChat from '../../components/AddChat';
 
 import useUser from '../../hooks/useUser';
-import { getUserChats } from '../../services/firebase';
 
 import getRecipientName from '../../helpers/getRecipientName';
 
 import { useRouter } from 'next/router';
 
 const chat = () => {
+  const { firebase, FieldValue } = useContext(FirebaseContext);
+
   const { authUser } = useUser();
-  const [chat, setChat] = useState([]);
+  const [user] = useAuthState(firebase.auth());
+
+  const userChatRef = firebase
+    .firestore()
+    .collection('chats')
+    .where('users', 'array-contains', user !== null && user.uid);
+
+  const [chatSnapshot] = useCollection(userChatRef);
+
   const [chatRecipient, setChatRecipient] = useState('');
   const [addChat, setAddChat] = useState(false);
 
@@ -25,12 +38,6 @@ const chat = () => {
   useEffect(() => {
     document.title = 'Chats - Connecto';
 
-    const getChats = async (id) => {
-      const response = await getUserChats(id);
-
-      setChat(response);
-    };
-
     const getRecipient = async (chatId, authUserId) => {
       const response = await getRecipientName(chatId, authUserId);
 
@@ -38,10 +45,9 @@ const chat = () => {
     };
 
     if (authUser.userId) {
-      getChats(authUser.userId);
       getRecipient(id, authUser.userId);
     }
-  }, [authUser, id]);
+  }, [user, authUser, id]);
 
   return (
     <div>
@@ -49,12 +55,20 @@ const chat = () => {
 
       <div className={styles.container}>
         <div className={styles.messageFriends}>
-          <ChatSidebar chat={chat} setAddChat={setAddChat} />
+          {chatSnapshot?.docs && (
+            <ChatSidebar chat={chatSnapshot?.docs} setAddChat={setAddChat} />
+          )}
         </div>
 
         <MessageBox chatRecipient={chatRecipient} chatBox={true} chatId={id} />
 
-        <AddChat showModal={addChat} setOpenModal={setAddChat} />
+        {chatSnapshot?.docs && (
+          <AddChat
+            showModal={addChat}
+            setOpenModal={setAddChat}
+            chat={chatSnapshot?.docs}
+          />
+        )}
       </div>
     </div>
   );

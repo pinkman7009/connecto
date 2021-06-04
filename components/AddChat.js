@@ -5,25 +5,36 @@ import Connections from '../components/Connections';
 import FirebaseContext from '../context/firebase';
 
 import useUser from '../hooks/useUser';
+import chatAlreadyExists from '../helpers/chatAlreadyExists';
 
-const AddChat = ({ showModal, setOpenModal }) => {
+import { useRouter } from 'next/router';
+
+const AddChat = ({ showModal, setOpenModal, chat }) => {
   const { firebase } = useContext(FirebaseContext);
   const { authUser } = useUser();
   const [connections, setConnections] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     setConnections(authUser.connections);
   }, [authUser]);
 
   const startChatting = async (user) => {
-    await firebase
-      .firestore()
-      .collection('chats')
-      .add({
-        users: [authUser.userId, user.userId],
-      });
-
+    const response = chatAlreadyExists(chat, user);
     setOpenModal((prev) => !prev);
+
+    if (response) {
+      router.push(`/messages/${response}`);
+    } else {
+      const response = await firebase
+        .firestore()
+        .collection('chats')
+        .add({
+          users: [authUser.userId, user.userId],
+        });
+
+      router.push(`/messages/${response.id}`);
+    }
   };
   return (
     <>
