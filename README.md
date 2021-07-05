@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://GitHub.com/Naereen/ama)
+[![GitHub forks](https://img.shields.io/github/forks/saswatamcode/the_shoppies?style=social)](https://GitHub.com/pinkman7009/connecto/network/)
+[![GitHub stars](https://img.shields.io/github/stars/saswatamcode/the_shoppies?style=social)](https://GitHub.com/pinkman7009/connecto/stargazers/)
+[![GitHub issues](https://img.shields.io/github/issues/saswatamcode/the_shoppies.svg)](https://GitHub.com/pinkman7009/connecto/issues/)
+[![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
-## Getting Started
+# Connecto - A Social media website for college students 
 
-First, run the development server:
+Connecto is a social media website for college students which acts as a medium for people from different colleges all over the country to interact, communicate and meet like minded people.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Create posts and events.
+2. Add people to connections and chat with them.
+3. Search for users and view their profile.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Built with
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1. <a href='https://nextjs.org/'>next.js v10 with react v17</a>: Routing and server side rendering with Next.js.
+2. <a href='https://reactjs.org/docs/context.html'>Context API</a>: Used in state management for users, and for firebase.
+3. <a href='https://www.npmjs.com/package/react-spinners'>react-spinners</a>: For loading animations
+4. <a href='https://www.npmjs.com/package/js-cookie'>js-cookie</a>: To store the authorization token in cookies.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Screenshots
 
-## Learn More
+<img src='./public/1.png'>
+<img src='./public/2.png'>
+<img src='./public/3.png'>
+<img src='./public/4.png'>
+<img src='./public/5.png'>
+<img src='./public/6.png'>
+<img src='./public/7.png'>
+<img src='./public/8.png'>
+<img src='./public/9.png'>
 
-To learn more about Next.js, take a look at the following resources:
+## To Run
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone into repo
+2. Run `npm install`
+5. Run `npm run dev`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Live Demo
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+https://connecto.vercel.app/
