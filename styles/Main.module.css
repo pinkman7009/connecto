@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   position: relative;
+  padding: 1rem;
 }
 
 .feed {
@@ -129,4 +130,34 @@
 }
 .btn2:focus {
   outline: none;
+}
+
+@media screen and (max-width: 1600px) {
+  .feed {
+    width: 60%;
+  }
+  .profileinfo {
+    width: 30%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .userinfo {
+    min-height: 35vh;
+  }
+}
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column-reverse;
+  }
+  .profileinfo {
+    position: static;
+    width: 100%;
+    min-height: 30vh;
+  }
+  .userinfo {
+    min-height: 30vh;
+  }
+  .feed {
+    width: 100%;
+  }
 }
