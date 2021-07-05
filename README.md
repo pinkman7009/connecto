@@ -6,7 +6,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/saswatamcode/the_shoppies.svg)](https://GitHub.com/pinkman7009/connecto/issues/)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
-# Connecto - A Social media website for college students 
+# Connecto - A Social media website for college students
 
 Connecto is a social media website for college students which acts as a medium for people from different colleges all over the country to interact, communicate and meet like minded people.
 
@@ -39,7 +39,8 @@ Connecto is a social media website for college students which acts as a medium f
 
 1. Clone into repo
 2. Run `npm install`
-5. Run `npm run dev`
+3. Create a folder called config and create a file firebaseConfig.js for your firebase app credentials.
+4. Run `npm run dev`
 
 ## Live Demo
 
