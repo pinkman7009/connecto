@@ -22,6 +22,7 @@ Connecto is a social media website for college students which acts as a medium f
 2. <a href='https://reactjs.org/docs/context.html'>Context API</a>: Used in state management for users, and for firebase.
 3. <a href='https://www.npmjs.com/package/react-spinners'>react-spinners</a>: For loading animations
 4. <a href='https://www.npmjs.com/package/js-cookie'>js-cookie</a>: To store the authorization token in cookies.
+5. <a href='https://firebase.google.com/'>Firebase</a>: Firebase used for authentication and Cloud Firestore for storing data of the application.
 
 ## Screenshots
 
