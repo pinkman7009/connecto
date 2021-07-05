@@ -16,6 +16,11 @@ Connecto is a social media website for college students which acts as a medium f
 2. Add people to connections and chat with them.
 3. Search for users and view their profile.
 
+## Future Updates 
+
+1. Making it responsive.
+2. Adding groups functionality ( now groups are hard coded ).
+
 ## Built with
 
 1. <a href='https://nextjs.org/'>next.js v10 with react v17</a>: Routing and server side rendering with Next.js.
